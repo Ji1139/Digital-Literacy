@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미디어 리터러시: 피드 너머의 진실</title>
+<style>
+:root{--navy:#17233f;--blue:#4767e8;--ink:#202b42;--muted:#69758b;--line:#e4e8f0;--bg:#f3f5fa;--paper:#fff;--green:#187b58;--amber:#a66a17;--red:#b74747}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;line-height:1.7}
+.app{max-width:850px;margin:0 auto;padding:22px 16px 50px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.logo{font-size:13px;font-weight:900;letter-spacing:1.4px;color:var(--blue)}.chapter{font-size:12px;color:var(--muted);font-weight:700}
+.hero{background:linear-gradient(135deg,#17233f,#344f9e);color:#fff;padding:34px 28px;border-radius:22px;position:relative;overflow:hidden;min-height:235px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero:before{content:"";position:absolute;width:250px;height:250px;border:1px solid #ffffff24;border-radius:50%;right:-55px;top:-95px;box-shadow:0 0 0 25px #ffffff0a,0 0 0 55px #ffffff08}
+.kicker{font-size:11px;letter-spacing:2px;color:#c7d3ff;font-weight:800;position:relative}.hero h1{font-size:clamp(28px,6vw,44px);line-height:1.2;margin:10px 0;position:relative;letter-spacing:-1px}.hero p{color:#e0e7ff;margin:0;max-width:550px;position:relative}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:15px;box-shadow:0 8px 25px #1c2d4a08}
+.status{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.metric{background:#f7f8fc;border-radius:12px;padding:10px 12px}.metric b{display:block;font-size:18px}.metric span{font-size:11px;color:var(--muted)}
+.track{height:7px;background:#e9edf5;border-radius:99px;margin:15px 0 0;overflow:hidden}.fill{height:100%;background:var(--blue);width:0;transition:width .3s}
+.scene-label{font-size:11px;color:var(--blue);font-weight:900;letter-spacing:1.2px}.scene h2{font-size:23px;line-height:1.35;margin:5px 0 12px}.story{font-size:15px;white-space:pre-line}.dialogue{background:#f3f6ff;border-left:3px solid var(--blue);padding:13px 15px;border-radius:9px;margin:15px 0;font-weight:650}
+.question{font-weight:850;margin:20px 0 10px}.choices{display:grid;gap:10px}.choice{border:1px solid var(--line);border-radius:12px;padding:13px 14px;display:flex;gap:11px;align-items:flex-start;cursor:pointer;transition:.15s;background:#fff}.choice:hover{border-color:#aab8f5;background:#fafbff}.choice:has(input:checked){border:2px solid var(--blue);background:#f4f6ff;padding:12px 13px}.choice input{accent-color:var(--blue);margin-top:6px}.choice .letter{font-weight:900;color:var(--blue);min-width:20px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:11px;padding:12px 18px;background:var(--blue);color:white;font-weight:800;cursor:pointer}.btn:disabled{opacity:.45;cursor:not-allowed}.btn.alt{background:#edf0f7;color:#35415a}
+.note{font-size:12px;color:var(--muted);margin-top:12px}
+.feedback{display:none;border-radius:12px;padding:15px;margin-top:16px}.feedback.show{display:block}.feedback h3{margin:0 0 5px;font-size:16px}.feedback.good{background:#eff8f3;border:1px solid #cde9d9}.feedback.warn{background:#fff7ed;border:1px solid #f1dfc2}.feedback.bad{background:#fff2f1;border:1px solid #f0d0cd}
+.consequence{font-size:14px;margin-top:8px}.ending{display:none}.ending.show{display:block}.ending h2{font-size:28px;margin:5px 0}.ending .type{color:var(--blue);font-weight:900;font-size:12px;letter-spacing:1px}.ending p{white-space:pre-line}.review{border-top:1px solid var(--line);margin-top:18px;padding-top:14px}.review-item{padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.review-item b{display:block}.reflection textarea{width:100%;min-height:95px;border:1px solid var(--line);border-radius:10px;padding:12px;font:inherit}
+.intro{display:block}.game{display:none}.game.show{display:block}.intro.hide{display:none}
+footer{text-align:center;color:#8791a4;font-size:11px;margin-top:22px}
+@media(max-width:560px){.hero{padding:26px 21px;min-height:220px}.panel{padding:17px}.scene h2{font-size:21px}.status{gap:6px}.metric{padding:8px}.metric b{font-size:16px}}
+@media print{body{background:white}.top,.hero,.track,.actions,.note{display:none!important}.panel{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="app">
+ <div class="top"><div class="logo">MEDIA LAB / INTERACTIVE STORY</div><div class="chapter" id="chapterTop">PROLOGUE</div></div>
+ <section class="hero">
+  <div class="kicker">A CHOICE-BASED MEDIA LITERACY GAME</div>
+  <h1>피드 너머의 진실</h1>
+  <p>작은 공유 하나가 학교 전체를 흔들 수 있다. 네 선택으로 사건의 결말을 바꿔 봐.</p>
+ </section>
+ <section class="panel intro" id="intro">
+  <div class="scene-label">PROLOGUE · 사건의 시작</div>
+  <h2>평범했던 월요일 아침</h2>
+  <p class="story">등교하자마자 친구들이 휴대폰 화면을 들여다보고 있다. 학교 익명 커뮤니티에 게시물 하나가 올라왔기 때문이다.
+
+“우리 학교 학생 대부분이 수업 시간에도 휴대폰을 사용하고 있고, 최근 성적이 떨어진 것도 그 때문이래.”
+
+게시물에는 자극적인 제목과 흐릿한 통계 이미지가 첨부되어 있다. 출처는 적혀 있지 않다. 그런데 게시물은 이미 빠르게 퍼지고 있다.
+
+잠시 뒤, 학생회 홍보부장 서윤에게 메시지가 온다.</p>
+  <div class="dialogue">“이거 사실인지 모르겠는데, 학교 계정에 올려서 주의를 줘야 할까? 네가 같이 확인해 줄래?”</div>
+  <p>너는 학교 미디어 탐사단의 일원이다. 앞으로 네가 내리는 선택은 친구들의 반응, 정보가 퍼지는 방향, 사건의 결말에 영향을 준다.</p>
+  <div class="actions"><button class="btn" onclick="startGame()">사건 조사 시작하기 →</button></div>
+  <p class="note">약 10~15분 · 4개의 장면 · 선택에 따라 달라지는 이야기</p>
+ </section>
+ <section class="game" id="game">
+  <div class="panel">
+   <div class="status">
+    <div class="metric"><b id="chapterMetric">1 / 4</b><span>진행 장면</span></div>
+    <div class="metric"><b id="trustMetric">50</b><span>친구들의 신뢰도</span></div>
+    <div class="metric"><b id="spreadMetric">50</b><span>소문 확산 정도</span></div>
+   </div>
+   <div class="track"><div class="fill" id="progress"></div></div>
+  </div>
+  <div class="panel scene">
+   <div class="scene-label" id="sceneLabel">CHAPTER 01</div>
+   <h2 id="sceneTitle"></h2>
+   <div class="story" id="sceneStory"></div>
+   <div class="dialogue" id="sceneDialogue"></div>
+   <div class="question" id="sceneQuestion"></div>
+   <div class="choices" id="sceneChoices"></div>
+   <div class="actions"><button class="btn" id="chooseBtn" onclick="choose()">이 선택으로 진행하기 →</button></div>
+   <div class="feedback" id="feedback" aria-live="polite"></div>
+   <p class="note">선택 후에는 이전 장면으로 돌아갈 수 없어. 네 판단이 이야기의 다음 장면을 바꿔.</p>
+  </div>
+ </section>
+ <section class="panel ending" id="ending">
+  <div class="scene-label">FINAL CHAPTER · 사건의 결말</div>
+  <div class="type" id="endingType"></div>
+  <h2 id="endingTitle"></h2>
+  <p id="endingStory"></p>
+  <div class="dialogue" id="endingQuote"></div>
+  <div class="review"><h3>네 선택 돌아보기</h3><div id="reviewList"></div></div>
+  <div class="reflection">
+   <h3>현실에서의 나의 실천 약속</h3>
+   <p class="note">이번 이야기에서 배운 점을 실제 온라인 생활에 어떻게 적용할지 적어 봐.</p>
+   <textarea id="promise" placeholder="예: 출처가 불분명한 게시물을 발견하면 바로 공유하지 않고 원자료를 확인하겠다."></textarea>
+  </div>
+  <div class="actions"><button class="btn" onclick="window.print()">결과 인쇄하기</button><button class="btn alt" onclick="restart()">다른 선택으로 다시 플레이</button></div>
+ </section>
+ <footer>MEDIA LAB · 정보는 확인하고, 공유는 책임 있게</footer>
+</div>
+<script>
+const chapters=[
+{label:"CHAPTER 01 · 정보 검증",title:"게시물의 출처를 찾아라",story:"서윤과 함께 게시물에 첨부된 통계 이미지를 자세히 살펴본다. 숫자는 크게 적혀 있지만 조사 기관, 조사 날짜, 조사 대상은 보이지 않는다. 게시물을 처음 올린 계정은 이미 로그아웃한 상태다.\n\n서윤은 시간이 없으니 일단 주의를 주는 공지를 올리자고 한다.",dialogue:"“출처가 없긴 한데, 학생들이 조심하도록 빨리 알려야 하지 않을까?”",question:"너라면 가장 먼저 어떻게 할까?",choices:[
+{text:"학교 계정에 사실처럼 공지한다.",trust:-8,spread:18,quality:0,feedback:"게시물의 내용이 확인되기 전에 공식 계정으로 전달되면서 소문에 신뢰성이 더해졌다. 학교 계정의 영향력 때문에 게시물을 믿는 학생이 늘어난다.",lesson:"정보의 출처와 근거를 확인하지 않은 채 전달하면 잘못된 정보의 확산을 도울 수 있어."},
+{text:"원자료와 조사 기관을 찾아 확인한다.",trust:12,spread:-12,quality:2,feedback:"조사 기관을 역추적해 보니 이미지에 적힌 수치를 뒷받침하는 자료를 찾을 수 없다. 서윤도 공지를 잠시 보류하고 추가 확인에 동의한다.",lesson:"출처, 조사 대상, 표본 수, 조사 시점 등 원자료를 확인해야 주장의 신뢰성을 판단할 수 있어."},
+{text:"친구들에게 사실인지 투표해 보자고 한다.",trust:3,spread:8,quality:0,feedback:"투표 참여는 늘었지만 사실 여부는 여전히 알 수 없다. 많은 사람이 믿는다는 결과가 정보의 진실성을 증명하지는 않는다.",lesson:"여론이나 다수의 의견은 사실 검증을 대신할 수 없어."},
+{text:"출처가 없으니 무조건 거짓이라고 반박한다.",trust:0,spread:-3,quality:1,feedback:"몇몇 학생은 반박에 동의하지만, 근거가 부족하다는 점은 게시물과 똑같다. 확인되지 않은 정보를 또 다른 단정으로 대응한 셈이다.",lesson:"근거가 부족할 때는 '거짓'이라고 단정하기보다 '현재 확인할 근거가 부족하다'고 표현하는 게 정확해."}
+]},
+{label:"CHAPTER 02 · 알고리즘 이해",title:"추천 피드에 갇히다",story:"조사를 이어가던 중, 네 피드에는 해당 게시물을 다룬 영상과 비슷한 주장만 계속 추천된다. 일부 영상은 자극적인 제목으로 학생들의 불안을 키우고 있다.\n\n서윤은 추천 영상 몇 개를 보여주며 말한다.",dialogue:"“계속 같은 얘기가 나오는데, 이제 사실이라고 봐도 되는 거 아닐까?”",question:"정보의 편향을 줄이기 위해 어떤 행동을 할까?",choices:[
+{text:"추천 영상이 많으니 공통된 주장을 믿는다.",trust:-5,spread:15,quality:0,feedback:"비슷한 주장이 반복 노출되면서 사실처럼 느껴진다. 하지만 추천 횟수는 정확성의 증거가 아니다.",lesson:"추천 알고리즘은 관심사와 이용 기록을 반영할 수 있어. 반복 노출을 신뢰도의 근거로 착각하면 안 돼."},
+{text:"다른 언론사와 공식 자료도 찾아 비교한다.",trust:10,spread:-10,quality:2,feedback:"서로 다른 출처를 비교하자 게시물의 주장에 빠진 맥락이 보이기 시작한다. 서윤도 다양한 자료를 함께 살펴보기로 한다.",lesson:"교차 검증과 다양한 관점의 탐색은 필터 버블과 정보 편향을 줄이는 데 도움이 돼."},
+{text:"나와 다른 의견을 다루는 계정을 모두 차단한다.",trust:-2,spread:5,quality:0,feedback:"불편한 정보는 줄었지만 다른 관점을 접할 기회도 함께 사라졌다. 정보 환경은 더 좁아졌다.",lesson:"다른 관점을 무조건 배제하기보다 근거와 신뢰성을 따져 비판적으로 비교하는 태도가 필요해."},
+{text:"영상을 더 많이 시청해 추천 결과를 확인한다.",trust:0,spread:12,quality:0,feedback:"관련 영상이 더 많이 추천되지만, 콘텐츠의 양만 늘었을 뿐 사실 확인은 이루어지지 않았다.",lesson:"정보를 많이 보는 것과 정확하게 검증하는 것은 다른 일이야."}
+]},
+{label:"CHAPTER 03 · 디지털 시민성",title:"친구의 얼굴이 등장하다",story:"새로운 게시물이 올라온다. 이번에는 수업 시간에 휴대폰을 사용했다는 학생의 영상이다. 영상 속 인물은 네 친구 민재다. 영상에는 촬영 동의 여부도, 앞뒤 상황도 설명되어 있지 않다. 댓글에는 민재를 비난하는 말이 달리기 시작한다.\n\n민재에게서 메시지가 도착한다.",dialogue:"“영상이 퍼지고 있어. 앞뒤 상황도 모르면서 다들 나를 비난해. 어떻게 해야 할지 모르겠어.”",question:"친구의 권리를 보호하면서 문제를 해결하려면?",choices:[
+{text:"사실을 알리기 위해 영상을 다른 친구에게 공유한다.",trust:-15,spread:18,quality:0,feedback:"영상을 본 사람은 더 많아졌고 민재는 더 큰 부담을 느낀다. 좋은 의도라도 동의 없는 공유는 피해를 키울 수 있다.",lesson:"정보를 전달하려는 목적이 있어도 당사자의 동의와 사생활을 먼저 고려해야 해."},
+{text:"공유를 멈추고 게시자에게 삭제 요청·신고를 한다.",trust:15,spread:-15,quality:2,feedback:"민재는 자신의 상황을 존중해 준 것에 고마워한다. 게시물 신고와 삭제 요청이 진행되고 확산도 줄어든다.",lesson:"타인의 초상과 사생활을 존중하고, 피해가 발생하면 공유 중단·삭제 요청·신고 등으로 대응해야 해."},
+{text:"댓글로 민재를 비난하는 사람들과 똑같이 공격한다.",trust:-12,spread:12,quality:0,feedback:"댓글 싸움이 커지고 사건의 핵심은 흐려진다. 비난에 비난으로 대응하면서 갈등이 확대됐다.",lesson:"온라인에서도 표현에는 책임이 따르며, 혐오와 조롱은 문제 해결에 도움이 되지 않아."},
+{text:"아무것도 하지 않고 상황이 끝나길 기다린다.",trust:-4,spread:7,quality:0,feedback:"직접 확산시키지는 않았지만 민재는 도움을 받지 못했다. 피해를 줄일 수 있는 행동을 놓쳤다.",lesson:"직접 게시하지 않았더라도 신고나 도움 요청 등 책임 있는 개입을 할 수 있어."}
+]},
+{label:"CHAPTER 04 · 능동적 참여",title:"학교에 변화를 제안하다",story:"며칠 뒤, 학교는 이번 사건을 계기로 디지털 시민성 캠페인을 열기로 한다. 서윤은 학생들이 직접 참여하는 활동을 제안한다.\n\n“이번 일을 그냥 끝내지 말자. 우리가 배운 걸 학교 전체와 나눠 보자.”",dialogue:"“어떤 캠페인이 학생들의 실제 행동을 바꿀 수 있을까?”",question:"네가 제안할 캠페인은 무엇일까?",choices:[
+{text:"확인되지 않은 게시물을 발견하면 무조건 삭제하자는 규칙을 만든다.",trust:0,spread:-2,quality:0,feedback:"간단한 규칙이지만 어떤 정보가 확인되지 않았는지 판단하는 기준이 부족하다. 무조건 삭제는 비판적 판단을 기르는 데 한계가 있다.",lesson:"정보를 무조건 차단하기보다 출처·근거를 확인하고 판단하는 기준을 익히는 것이 중요해."},
+{text:"출처 확인·교차 검증·책임 있는 공유를 연습하는 체험 부스를 연다.",trust:15,spread:-10,quality:2,feedback:"학생들이 실제 게시물을 분석하고 출처를 찾아보는 체험에 참여한다. 정보 확인을 행동으로 연습할 수 있게 됐다.",lesson:"실제 사례를 분석하고 직접 검증해 보는 활동은 미디어 리터러시를 생활 속 실천으로 연결해."},
+{text:"조회 수가 높은 자극적인 게시물로 캠페인을 홍보한다.",trust:-8,spread:10,quality:0,feedback:"관심은 끌었지만 자극적인 표현이 오히려 오해와 갈등을 키운다. 캠페인의 메시지와 홍보 방식이 어긋났다.",lesson:"관심을 끄는 것뿐 아니라 정보의 정확성과 전달 방식의 책임도 중요해."},
+{text:"온라인에서 문제가 생기면 휴대폰을 사용하지 말자고 제안한다.",trust:2,spread:-3,quality:0,feedback:"문제를 피하는 데 초점을 맞춘 제안이라 학생들의 실제 미디어 이용 역량을 키우기 어렵다.",lesson:"미디어를 무조건 피하는 것보다 안전하고 비판적으로 활용하는 능력을 기르는 것이 핵심이야."}
+]}
+];
+let index=0,trust=50,spread=50,history=[],locked=false;
+function startGame(){document.getElementById('intro').classList.add('hide');document.getElementById('game').classList.add('show');render();}
+function render(){let c=chapters[index];document.getElementById('chapterTop').textContent=`CHAPTER 0${index+1} / 04`;document.getElementById('chapterMetric').textContent=`${index+1} / 4`;document.getElementById('trustMetric').textContent=trust;document.getElementById('spreadMetric').textContent=spread;document.getElementById('progress').style.width=(index/4*100)+'%';document.getElementById('sceneLabel').textContent=c.label;document.getElementById('sceneTitle').textContent=c.title;document.getElementById('sceneStory').textContent=c.story;document.getElementById('sceneDialogue').textContent=c.dialogue;document.getElementById('sceneQuestion').textContent=c.question;document.getElementById('sceneChoices').innerHTML=c.choices.map((o,i)=>`<label class="choice"><input type="radio" name="decision" value="${i}"><span class="letter">${String.fromCharCode(65+i)}</span><span>${o.text}</span></label>`).join('');document.getElementById('feedback').className='feedback';document.getElementById('chooseBtn').disabled=false;document.getElementById('chooseBtn').textContent=index===3?'최종 선택하기 →':'이 선택으로 진행하기 →';locked=false;}
+function choose(){if(locked)return;let sel=document.querySelector('input[name="decision"]:checked');if(!sel){alert('선택지를 하나 골라 줘.');return;}let c=chapters[index],n=Number(sel.value),o=c.choices[n];trust=Math.max(0,Math.min(100,trust+o.trust));spread=Math.max(0,Math.min(100,spread+o.spread));history.push({chapter:c.title,choice:o.text,lesson:o.lesson,quality:o.quality});let f=document.getElementById('feedback');let cls=o.quality===2?'good':o.quality===1?'warn':'bad';f.className='feedback show '+cls;f.innerHTML=`<h3>${o.quality===2?'상황이 긍정적으로 바뀌었어':o.quality===1?'한 번 더 생각해 볼 지점이 있어':'예상하지 못한 결과가 나타났어'}</h3><div>${o.feedback}</div><div class="consequence"><b>이번 선택에서 배운 점</b><br>${o.lesson}</div>`;document.querySelectorAll('input[name="decision"]').forEach(x=>x.disabled=true);document.getElementById('chooseBtn').disabled=false;document.getElementById('chooseBtn').textContent=index===3?'결말 확인하기 →':'다음 장면으로 →';locked=true;document.getElementById('chooseBtn').onclick=next;}
+function next(){if(!locked)return;index++;if(index>=4){finish();return;}document.getElementById('chooseBtn').onclick=choose;render();window.scrollTo({top:document.querySelector('.scene').offsetTop-15,behavior:'smooth'});}
+function finish(){document.getElementById('game').classList.remove('show');let title,story,quote,type;
+let strong=history.filter(x=>x.quality===2).length;
+if(trust>=78&&spread<=38&&strong>=3){type='ENDING 01 · BEST ENDING';title='함께 만든 신뢰의 네트워크';story='네가 근거를 확인하고, 다양한 관점을 살피며, 친구의 권리를 보호하고, 실천적인 캠페인을 제안한 덕분에 학교 구성원들은 정보를 대하는 기준을 함께 세우게 되었다.\\n\\n처음의 게시물은 더 이상 무분별하게 공유되지 않는다. 학생들은 출처를 확인하고 서로의 권리를 존중하는 문화를 만들어 간다.';quote='서윤: “완벽한 정보 환경을 한 번에 만들 수는 없겠지만, 우리 선택이 변화를 시작하게 했어.”';}
+else if(trust<40||spread>=75){type='ENDING 03 · CRISIS ENDING';title='걷잡을 수 없이 퍼진 소문';story='확인되지 않은 정보가 여러 경로로 퍼지고, 친구의 영상까지 확산되면서 학교 안의 갈등이 커졌다. 뒤늦게 정정하려 했지만 이미 많은 학생이 처음 접한 내용을 사실처럼 기억하고 있다.\\n\\n사건은 끝났지만 정보가 퍼진 뒤 바로잡는 일이 얼마나 어려운지 모두가 깨닫게 되었다.';quote='서윤: “처음 공유하기 전에 한 번만 더 확인했더라면 달라졌을까?”';}
+else if(strong>=2){type='ENDING 02 · GROWTH ENDING';title='불완전하지만 의미 있는 변화';story='모든 선택이 완벽하지는 않았지만, 너는 중요한 순간에 근거를 확인하고 책임 있는 행동을 선택했다. 일부 오해와 갈등은 남았지만 학생회는 체험형 미디어 교육을 이어 가기로 했다.\\n\\n이번 사건은 학생들이 온라인 정보를 비판적으로 바라보는 계기가 되었다.';quote='서윤: “실수도 있었지만, 우리가 무엇을 배워야 하는지는 분명해졌어.”';}
+else{type='ENDING 04 · OPEN ENDING';title='아직 끝나지 않은 이야기';story='사건은 일단락되었지만, 정보의 신뢰성을 판단하는 기준과 온라인에서 서로를 존중하는 문화는 아직 충분히 자리 잡지 못했다.\\n\\n학교는 다음 학기에도 미디어 리터러시 활동을 이어 가기로 했다. 다음 선택은 이 이야기를 읽은 학생들의 몫이다.';quote='서윤: “이번 사건을 계기로 우리 모두가 조금씩 달라질 수 있을까?”';}
+document.getElementById('endingType').textContent=type;document.getElementById('endingTitle').textContent=title;document.getElementById('endingStory').textContent=story.replace(/\\n/g,'\n');document.getElementById('endingQuote').textContent=quote;document.getElementById('reviewList').innerHTML=history.map((h,i)=>`<div class="review-item"><b>${i+1}. ${h.chapter}</b>선택: ${h.choice}<br><span style="color:#68758b">배움: ${h.lesson}</span></div>`).join('');document.getElementById('chapterTop').textContent='ENDING';document.getElementById('ending').classList.add('show');document.getElementById('progress').style.width='100%';window.scrollTo({top:document.getElementById('ending').offsetTop-10,behavior:'smooth'});}
+function restart(){index=0;trust=50;spread=50;history=[];locked=false;document.getElementById('ending').classList.remove('show');document.getElementById('game').classList.remove('show');document.getElementById('intro').classList.remove('hide');document.getElementById('promise').value='';document.getElementById('chapterTop').textContent='PROLOGUE';window.scrollTo({top:0,behavior:'smooth'});}
+</script>
+</body>
+</html>
